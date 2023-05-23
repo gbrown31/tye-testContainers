@@ -7,12 +7,11 @@ namespace tye_testContainers
 {
     public class ContainerTest : IAsyncLifetime, IDisposable
     {
-        private const ushort HttpPort = 80;
-        private readonly CancellationTokenSource _cts = new(TimeSpan.FromMinutes(10));
+        private const int DbPort = 5432;
+        private readonly CancellationTokenSource _cts = new(TimeSpan.FromMinutes(0.5));
 
         private readonly INetwork _network;
         private readonly IContainer _dbContainer;
-        //private readonly IContainer _appContainer;
 
         public ContainerTest()
         {
@@ -23,7 +22,7 @@ namespace tye_testContainers
                 .WithImage("postgres")
                 .WithNetwork(_network)
                 .WithNetworkAliases("db")
-                .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(5432))
+                .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(DbPort))
                 .WithVolumeMount("postgres-data", "/var/lib/postgresql/data")
                 .Build();
         }
@@ -43,9 +42,6 @@ namespace tye_testContainers
 
         public Task DisposeAsync()
         {
-            //await _network.DisposeAsync();
-            //await _dbContainer.DisposeAsync();
-
             return Task.CompletedTask;
         }
 

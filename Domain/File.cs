@@ -5,10 +5,10 @@
         public int Id { get; private set; }
         public int ProjectId { get; private set; }
         public string Name { get; private set; }
-        public int FileSize { get; private set; }
+        public long FileSize { get; private set; }
         public string Extension { get; private set; }
 
-        public File(int id, string name, int fileSize, int projectId)
+        public File(int id, string name, long fileSize, int projectId)
         {
             Id = id;
             Name = name;

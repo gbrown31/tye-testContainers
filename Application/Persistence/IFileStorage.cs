@@ -7,5 +7,6 @@ namespace Application.Persistence
     {
         public bool StoreProjectFile(File fileToBeStored);
         public ICollection<File> RetrieveProjectFiles(Project project);
+        public bool IsHealthy();
     }
 }

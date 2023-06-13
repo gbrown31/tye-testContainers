@@ -10,6 +10,11 @@ namespace Application.Test.Persistence
 {
     internal class InMemoryFileStorage : IFileStorage
     {
+        public bool IsHealthy()
+        {
+            throw new NotImplementedException();
+        }
+
         public ICollection<Domain.File> RetrieveProjectFiles(Project project)
         {
             throw new NotImplementedException();

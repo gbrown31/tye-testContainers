@@ -1,16 +1,21 @@
-﻿using Domain;
+﻿using Application.Persistence;
+using Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Persistence
+namespace Persistence.Database
 {
-    public interface IDatabase
+    public class AppDbContext : DbContext, IDatabase
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectGroup> ProjectGroups { get; set; }
         public DbSet<ProjectUser> ProjectUsers { get; set; }
         public DbSet<Domain.File> Files { get; set; }
+        public AppDbContext(DbContextOptions options) : base(options) { }
 
-        public bool IsHealthy();
+        public bool IsHealthy()
+        {
+            return base.Database.CanConnect();
+        }
     }
 }

@@ -21,13 +21,21 @@ namespace Application
                 // validate query
                 ValidateQuery(query);
 
+                bool dbIsHealthy = DbContext.IsHealthy();
+                bool blobIsHealthy = FileStorage.IsHealthy();
+
                 // execute db search
-                List<File> userFiles = (from a in DbContext.Users
+                List<File> dbFiles = (from a in DbContext.Users
                                         join b in DbContext.ProjectUsers on a.Id equals b.UserId
                                         join c in DbContext.ProjectGroups on b.ProjectId equals c.ProjectId
                                         join d in DbContext.Files on c.ProjectId equals d.ProjectId
                                         where a.Id == query.UserId
                                         select d).ToList();
+
+                var project = new Domain.Project("Clean Code");
+                project.Id = 10;
+
+                var userFiles = FileStorage.RetrieveProjectFiles(project);
 
                 projectFiles.AddRange(userFiles);
             }

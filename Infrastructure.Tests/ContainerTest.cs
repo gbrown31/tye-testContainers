@@ -10,7 +10,7 @@ namespace Infrastructure.Tests
     {
         private const int DbPort = 5432;
         private const int BlobPort = 10000;
-        private readonly CancellationTokenSource _cts = new(TimeSpan.FromMinutes(0.5));
+        private readonly CancellationTokenSource _cts = new(TimeSpan.FromMinutes(5));
 
         private readonly INetwork _network;
         private readonly IContainer _dbContainer;

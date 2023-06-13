@@ -1,0 +1,27 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<div>@messageFromApi</div>
+
+@code{
+    private string messageFromApi = string.Empty;
+    protected override async Task OnInitializedAsync()
+    {
+        using (var client = new System.Net.Http.HttpClient())
+        {
+            // Call *mywebapi*, and display its response in the page
+            var request = new System.Net.Http.HttpRequestMessage();
+            // webapi is the container name
+            request.RequestUri = new Uri("http://webapi/api/projectfiles?userId=10");
+            var response = await client.SendAsync(request);
+            messageFromApi = await response.Content.ReadAsStringAsync();
+        }
+    }
+}

@@ -47,5 +47,10 @@ namespace Application.Test.Persistence
 
             project1.Files.Add(testFile);
         }
+
+        public bool IsHealthy()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

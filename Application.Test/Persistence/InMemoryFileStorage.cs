@@ -1,10 +1,5 @@
 ﻿using Application.Persistence;
 using Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Test.Persistence
 {
@@ -12,17 +7,20 @@ namespace Application.Test.Persistence
     {
         public bool IsHealthy()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public ICollection<Domain.File> RetrieveProjectFiles(Project project)
         {
-            throw new NotImplementedException();
+            return new List<Domain.File>()
+            {
+                new Domain.File("testfile.txt", 10, 1)
+            };
         }
 
         public bool StoreProjectFile(Domain.File fileToBeStored)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

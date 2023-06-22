@@ -12,6 +12,12 @@ namespace Persistence.Database
         public DbSet<ProjectUser> ProjectUsers { get; set; }
         public DbSet<Domain.File> Files { get; set; }
         public AppDbContext(DbContextOptions options) : base(options) { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProjectUser>().HasKey(a => new { a.ProjectId, a.UserId });
+
+            base.OnModelCreating(modelBuilder);
+        }
 
         public bool IsHealthy()
         {

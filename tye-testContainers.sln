@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Tests", "Infrastructure.Tests\Infrastructure.Tests.csproj", "{5A211363-360C-4A12-B280-8CA512AD245C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.Tests", "Infrastructure.Tests\Integration.Tests.csproj", "{5A211363-360C-4A12-B280-8CA512AD245C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{B506690E-5F96-44E3-8E3F-228CD5CFA23B}"
 EndProject
@@ -17,15 +17,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Test", "Applica
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{FE973195-55CA-4FAC-AD48-C37938AFAEB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{6CC3A479-E4D4-492E-A692-F5722638B8FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{6CC3A479-E4D4-492E-A692-F5722638B8FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{A8DA0143-BF11-4BC6-8ADE-ADF8B3DE1562}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.Database", "Persistence.Database\Persistence.Database.csproj", "{A8FD88AC-9415-427D-ADC4-B57F8A4E559D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.Database", "Persistence.Database\Persistence.Database.csproj", "{A8FD88AC-9415-427D-ADC4-B57F8A4E559D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.BlobStorage", "Persistence.BlobStorage\Persistence.BlobStorage.csproj", "{8B873FF6-0DD4-4FBE-99CD-28BEB2AA5DB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.BlobStorage", "Persistence.BlobStorage\Persistence.BlobStorage.csproj", "{8B873FF6-0DD4-4FBE-99CD-28BEB2AA5DB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI\WebUI.csproj", "{D1A0CB5F-EC10-41FC-9EBC-7FC8D28AFD2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "WebUI\WebUI.csproj", "{D1A0CB5F-EC10-41FC-9EBC-7FC8D28AFD2F}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6C990452-E049-44CE-A0F8-4F63308CD4DB}"
 EndProject

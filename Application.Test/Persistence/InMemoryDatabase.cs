@@ -1,23 +1,24 @@
-﻿using Application.Persistence;
-using Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain;
+using Microsoft.EntityFrameworkCore;
+using Persistence.Database;
 
 namespace Application.Test.Persistence
 {
-    internal class InMemoryDatabase : IDatabase
+    internal class InMemoryDatabase : AppDbContext
     {
-        public ICollection<User> Users { get; set; } = new HashSet<User>();
-        public ICollection<Project> Projects { get; set; } = new HashSet<Project>();
-        public ICollection<ProjectGroup> ProjectGroups { get; set; } = new HashSet<ProjectGroup>();
-        public ICollection<ProjectUser> ProjectUsers { get; set; } = new HashSet<ProjectUser>();
-        public ICollection<Domain.File> Files { get; set; } = new HashSet<Domain.File>();
-        public InMemoryDatabase()
+        public InMemoryDatabase() : base (GetInMemoryDbContextOptions())
         {
             SeedDatabase();
+        }
+
+        private static DbContextOptions GetInMemoryDbContextOptions()
+        {
+            var myDatabaseName = "mydatabase_" + DateTime.Now.ToFileTimeUtc();
+
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                            .UseInMemoryDatabase(databaseName: myDatabaseName)
+                            .Options;
+            return options;
         }
 
         public void SeedDatabase()
@@ -26,7 +27,7 @@ namespace Application.Test.Persistence
             user1.Id = 1;
             Users.Add(user1);
 
-            Project project1 = new Project("project1");
+            Project project1 = new Project("project1"); 
             project1.Id = 1;
             user1.Projects.Add(project1);
             Projects.Add(project1);
@@ -42,15 +43,12 @@ namespace Application.Test.Persistence
             group.Users.Add(projectUser);
             ProjectGroups.Add(group);
 
-            Domain.File testFile = new Domain.File(1, "testfile.txt", 10, 1);
+            Domain.File testFile = new Domain.File("testfile.txt", 10, 1);
             Files.Add(testFile);
 
             project1.Files.Add(testFile);
-        }
 
-        public bool IsHealthy()
-        {
-            throw new NotImplementedException();
+            SaveChanges();
         }
     }
 }

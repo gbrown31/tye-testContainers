@@ -4,6 +4,7 @@ using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Domain;
 using System.Collections.Immutable;
+using System.Text;
 
 namespace Persistence.BlobStorage
 {
@@ -29,7 +30,7 @@ namespace Persistence.BlobStorage
 
             var blobs = client.GetBlobs();
 
-            return blobs.Select(a => new Domain.File(1, a.Name, a.Properties.ContentLength.GetValueOrDefault(0), project.Id)).ToImmutableList();
+            return blobs.Select(a => new Domain.File(a.Name, a.Properties.ContentLength.GetValueOrDefault(0), project.Id)).ToImmutableList();
         }
 
         public bool StoreProjectFile(Domain.File fileToBeStored)

@@ -26,18 +26,21 @@ namespace Application
 
                 // execute db search
                 List<File> dbFiles = (from a in DbContext.Users
-                                        join b in DbContext.ProjectUsers on a.Id equals b.UserId
-                                        join c in DbContext.ProjectGroups on b.ProjectId equals c.ProjectId
-                                        join d in DbContext.Files on c.ProjectId equals d.ProjectId
-                                        where a.Id == query.UserId
-                                        select d).ToList();
+                                      join b in DbContext.ProjectUsers on a.Id equals b.UserId
+                                      join c in DbContext.ProjectGroups on b.ProjectId equals c.ProjectId
+                                      join d in DbContext.Files on c.ProjectId equals d.ProjectId
+                                      where a.Id == query.UserId
+                                      select d).ToList();
 
-                var project = new Domain.Project("Clean Code");
-                project.Id = 10;
+                foreach (var dbFile in dbFiles)
+                {
+                    var project = new Domain.Project(dbFile.ProjectId.ToString());
+                    project.Id = dbFile.ProjectId;
 
-                var userFiles = FileStorage.RetrieveProjectFiles(project);
+                    var userFiles = FileStorage.RetrieveProjectFiles(project);
 
-                projectFiles.AddRange(userFiles);
+                    projectFiles.AddRange(userFiles);
+                }
             }
 
             return await Task.FromResult<List<File>>(projectFiles);

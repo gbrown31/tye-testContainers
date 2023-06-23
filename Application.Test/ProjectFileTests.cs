@@ -16,10 +16,10 @@ namespace Application.Test
         [Fact]
         public async Task UserWithProjects_ShouldReturnFiles()
         {
-            GetAllProjectFilesQuery query = new GetAllProjectFilesQuery();
+            GetAllUserFilesQuery query = new GetAllUserFilesQuery();
             query.UserId = 1;
 
-            GetAllProjectFiles getAllFiles = new GetAllProjectFiles(_database, _fileStorage);
+            GetAllUserFiles getAllFiles = new GetAllUserFiles(_database, _fileStorage);
 
             var files = await getAllFiles.HandleAsync(query);
 

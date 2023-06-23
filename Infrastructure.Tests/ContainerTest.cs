@@ -1,71 +1,53 @@
-using DotNet.Testcontainers.Builders;
+using Application;
 using DotNet.Testcontainers.Containers;
-using DotNet.Testcontainers.Networks;
-using Testcontainers.PostgreSql;
-//using TestEnvironment.Docker;
+using tye_testContainers;
 
 namespace Infrastructure.Tests
 {
-    public class ContainerTest : IAsyncLifetime, IDisposable
+    public class ContainerTest : IClassFixture<ContainerFixture>
     {
-        private const int DbPort = 5432;
-        private const int BlobPort = 10000;
-        private readonly CancellationTokenSource _cts = new(TimeSpan.FromMinutes(0.5));
-
-        private readonly INetwork _network;
-        private readonly IContainer _dbContainer;
-        private readonly IContainer _azuriteContainer;
-
-        public ContainerTest()
-        {
-            _network = new NetworkBuilder()
-                .Build();
-
-            _dbContainer = new PostgreSqlBuilder()
-                .WithImage("postgres")
-                .WithNetwork(_network)
-                .WithNetworkAliases("db")
-                .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(DbPort))
-                .WithVolumeMount("postgres-data", "/var/lib/postgresql/data")
-                .Build();
-
-
-            _azuriteContainer = new ContainerBuilder()
-                .WithImage("mcr.microsoft.com/azure-storage/azurite")
-                .WithNetwork(_network)
-                .WithNetworkAliases("azurite")
-                //.WithCommand("azurite-blob", "--blohost 0.0.0.0", $"--blobPort {BlobPort}")
-                .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(BlobPort))
-                .Build();
-        }
-
-        public async Task InitializeAsync()
-        {
-            await _network.CreateAsync(_cts.Token).ConfigureAwait(false);
-            await _dbContainer.StartAsync(_cts.Token).ConfigureAwait(false);
-            await _azuriteContainer.StartAsync(_cts.Token).ConfigureAwait(false);
+        private readonly ContainerFixture _fixture;
+        public ContainerTest(ContainerFixture fixture) 
+        { 
+            _fixture = fixture;
         }
 
         [Fact]
         public void DbContainer_IsHealthy()
         {
-            Assert.Equal(TestcontainersStates.Running, _dbContainer.State);
+            Assert.Equal(TestcontainersStates.Running, _fixture.DbContainer.State);
         }
 
         [Fact]
         public void AzureContainer_IsHealthy()
         {
-            Assert.Equal(TestcontainersStates.Running, _azuriteContainer.State);
+            Assert.Equal(TestcontainersStates.Running, _fixture.BlobContainer.State);
         }
 
-        public Task DisposeAsync()
+        [Fact]
+        public async Task UserWithProjects_ShouldReturnFiles()
         {
-            return Task.CompletedTask;
-        }
+            GetAllUserFilesQuery query = new GetAllUserFilesQuery();
+            query.UserId = _fixture.DbContext.ValidUserId;
 
-        public void Dispose()
+            GetAllUserFiles getAllFiles = new GetAllUserFiles(_fixture.DbContext, _fixture.FileStorage);
+
+            var files = await getAllFiles.HandleAsync(query);
+
+            Assert.NotNull(files);
+        }
+        [Fact]
+        public void AddProjectFile_ShouldReturnSuccess()
         {
-            _cts.Dispose();
+            AddFileToProjectCommand command = new AddFileToProjectCommand();
+            command.UserId = _fixture.DbContext.ValidUserId;
+            command.ProjectId = 10;
+            command.FileName = "Test";
+
+            AddFileToProjectHandler handler = new AddFileToProjectHandler(_fixture.DbContext, _fixture.FileStorage);
+            var result = handler.Handle(command);
+
+            Assert.True(result);
         }
     }
 }

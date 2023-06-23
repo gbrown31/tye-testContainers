@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  webui:
+    image: ${DOCKER_REGISTRY-}webui
+    depends_on:
+     - webapi
+    build:
+      context: .
+      dockerfile: WebUI/Dockerfile
+
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi
+    build:
+      context: .
+      dockerfile: WebAPI/Dockerfile
+
+  azurite:
+    image:  mcr.microsoft.com/azure-storage/azurite
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+
+  db:
+    image: mcr.microsoft.com/azure-sql-edge:1.0.4
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: example_123
+    ports:
+     - "1433:1433"
+            

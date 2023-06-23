@@ -1,6 +1,6 @@
 ﻿namespace Application
 {
-    public class GetAllProjectFilesQuery
+    public class GetAllUserFilesQuery
     {
         public int UserId { get; set; }
     }

@@ -3,17 +3,17 @@ using File = Domain.File;
 
 namespace Application
 {
-    public class GetAllProjectFiles
+    public class GetAllUserFiles
     {
         private readonly IDatabase DbContext;
         private readonly IFileStorage FileStorage;
-        public GetAllProjectFiles(IDatabase dbContext, IFileStorage fileStorage)
+        public GetAllUserFiles(IDatabase dbContext, IFileStorage fileStorage)
         {
             this.DbContext = dbContext;
             this.FileStorage = fileStorage;
         }
 
-        public async Task<ICollection<File>> HandleAsync(GetAllProjectFilesQuery query)
+        public async Task<ICollection<File>> HandleAsync(GetAllUserFilesQuery query)
         {
             List<File> projectFiles = new List<File>();
             if (query != null)
@@ -46,7 +46,7 @@ namespace Application
             return await Task.FromResult<List<File>>(projectFiles);
         }
 
-        private void ValidateQuery(GetAllProjectFilesQuery query)
+        private void ValidateQuery(GetAllUserFilesQuery query)
         {
             if (query.UserId <= 0)
             {

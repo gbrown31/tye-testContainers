@@ -35,6 +35,12 @@ namespace Persistence.BlobStorage
 
         public bool StoreProjectFile(Domain.File fileToBeStored)
         {
+            byte[] data = new byte[fileToBeStored.FileSize * 1024 * 1024];
+            Random rng = new Random();
+            rng.NextBytes(data);
+
+            client.UploadBlob(fileToBeStored.Name, new BinaryData(data));
+
             return true;
         }
         public bool IsHealthy()

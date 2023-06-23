@@ -22,7 +22,7 @@ namespace tye_testContainers.Persistence
 
         public FileStorageConfig(int port)
         {
-            this.BlobUri = new Uri($"http://localhost:{port}/devstoreaccount1/files");
+            this.BlobUri = new Uri($"http://127.0.0.1:{port}/devstoreaccount1/files");
             this.AccountName = "devstoreaccount1";
             this.AccountKey = "Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==";
         }

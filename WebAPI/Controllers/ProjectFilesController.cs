@@ -16,12 +16,20 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Get([FromQuery] GetAllProjectFilesQuery query, [FromServices] IDatabase dbContext, [FromServices] IFileStorage fileStorage)
+        public async Task<ActionResult> Get([FromQuery] GetAllUserFilesQuery query, [FromServices] IDatabase dbContext, [FromServices] IFileStorage fileStorage)
         {
-            GetAllProjectFiles handler = new GetAllProjectFiles(dbContext, fileStorage);
+            GetAllUserFiles handler = new GetAllUserFiles(dbContext, fileStorage);
             var result = await handler.HandleAsync(query);
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        public ActionResult Post([FromBody] AddFileToProjectCommand command, [FromServices] IDatabase dbContext, [FromServices] IFileStorage fileStorage)
+        {
+            AddFileToProjectHandler handler = new AddFileToProjectHandler(dbContext, fileStorage);
+
+            return Ok(handler.Handle(command));
         }
     }
 }

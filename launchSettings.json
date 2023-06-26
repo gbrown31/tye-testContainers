@@ -5,7 +5,8 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "webui": "StartDebugging",
-        "webapi": "StartDebugging"
+        "webapi": "StartDebugging",
+        "functionapp5": "StartDebugging"
       }
     }
   }

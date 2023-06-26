@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "WebUI\WebUI.csproj
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6C990452-E049-44CE-A0F8-4F63308CD4DB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlobTriggerFunc", "BlobTriggerFunc\BlobTriggerFunc.csproj", "{FAB041F8-621F-4E9E-8D1E-DD4EBD3DA273}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{6C990452-E049-44CE-A0F8-4F63308CD4DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C990452-E049-44CE-A0F8-4F63308CD4DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C990452-E049-44CE-A0F8-4F63308CD4DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAB041F8-621F-4E9E-8D1E-DD4EBD3DA273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAB041F8-621F-4E9E-8D1E-DD4EBD3DA273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAB041F8-621F-4E9E-8D1E-DD4EBD3DA273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAB041F8-621F-4E9E-8D1E-DD4EBD3DA273}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +90,7 @@ Global
 		{A8FD88AC-9415-427D-ADC4-B57F8A4E559D} = {A8DA0143-BF11-4BC6-8ADE-ADF8B3DE1562}
 		{8B873FF6-0DD4-4FBE-99CD-28BEB2AA5DB5} = {A8DA0143-BF11-4BC6-8ADE-ADF8B3DE1562}
 		{D1A0CB5F-EC10-41FC-9EBC-7FC8D28AFD2F} = {FE973195-55CA-4FAC-AD48-C37938AFAEB1}
+		{FAB041F8-621F-4E9E-8D1E-DD4EBD3DA273} = {FE973195-55CA-4FAC-AD48-C37938AFAEB1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80D9F432-C95F-42F9-B8C8-7BFF2E35F171}

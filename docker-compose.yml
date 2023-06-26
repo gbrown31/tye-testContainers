@@ -14,6 +14,12 @@ services:
     build:
       context: .
       dockerfile: WebAPI/Dockerfile
+            
+  blobtriggerfunc:
+    image: ${DOCKER_REGISTRY-}blobtriggerfunc
+    build:
+      context: .
+      dockerfile: BlobTriggerFunc/Dockerfile
 
   azurite:
     image:  mcr.microsoft.com/azure-storage/azurite
@@ -29,4 +35,4 @@ services:
       SA_PASSWORD: example_123
     ports:
      - "1433:1433"
-            
+
